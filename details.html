@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Health Assistant</title>
+    <style>
+                body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+            color: #e6e6e6;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            color: #00ffff;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            width: 400px;
+            margin: 20px auto;
+            color: #e6e6e6;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        select, button, input {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(26, 26, 46, 0.9);
+            color: #e6e6e6;
+            transition: all 0.3s ease;
+        }
+
+        select:hover, input:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ffff, #00b4d8);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #00b4d8, #00ffff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .doctor-search input {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #e6e6e6;
+        }
+
+        .doctor {
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            background: rgba(26, 26, 46, 0.9);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+            display: block;
+            color: #e6e6e6;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .doctor button, #showDoctorsBtn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .doctor button:hover, #showDoctorsBtn:hover {
+            background: linear-gradient(45deg, #ff8e8e, #ff6b6b);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .search-box {
+            background: rgba(26, 26, 46, 0.9);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: #e6e6e6;
+        }
+
+        .doctor-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .doctor-item {
+            background: rgba(26, 26, 46, 0.9);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            color: #e6e6e6;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .doctor-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+
+        .doctor-name {
+            font-weight: bold;
+            font-size: 18px;
+            color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        .doctor-specialization {
+            font-size: 14px;
+            color: #b3e0ff;
+        }
+
+        .btn-green { 
+            background: linear-gradient(45deg, #00ff9d, #00b4d8);
+            color: #1a1a2e;
+        }
+        .btn-green:hover { 
+            background: linear-gradient(45deg, #00b4d8, #00ff9d);
+        }
+        .btn-red { 
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+        }
+        .btn-red:hover { 
+            background: linear-gradient(45deg, #ff8e8e, #ff6b6b);
+        }
+        .btn-blue { 
+            background: linear-gradient(45deg, #00ffff, #00b4d8);
+            color: #1a1a2e;
+        }
+        .btn-blue:hover { 
+            background: linear-gradient(45deg, #00b4d8, #00ffff);
+        }
+        .btn-surya { 
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: #edf4ef;
+        }
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(26, 26, 46, 0.9);
+            color: #e6e6e6;
+            border-radius: 12px;
+            display: none;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        .tracker-container {
+            background: rgba(26, 26, 46, 0.9);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00ffff;
+            font-weight: bold;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        .tracker-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(26, 26, 46, 0.9);
+            color: #e6e6e6;
+            transition: all 0.3s ease;
+        }
+
+        .tracker-input:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        .tracker-input option {
+            background: #1a1a2e;
+            color: #e6e6e6;
+        }
+
+        .cycle-history {
+            margin-top: 25px;
+            text-align: left;
+        }
+
+        .cycle-entry {
+            background: rgba(26, 26, 46, 0.9);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            color: #e6e6e6;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cycle-entry:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+
+        .cycle-entry h4 {
+            margin: 0 0 10px 0;
+            color: #00ffff;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
+        }
+
+        .cycle-entry p {
+            margin: 8px 0;
+            color: #e6e6e6;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const doctors = [
+                {
+                    name: "Dr. Nookinaidu Chitikela",
+                    specialization: "Urologist",
+                    experience: "20 years",
+                    hospital: "Apollo Health City",
+                    successRate: "86%",
+                    timings: "9AM-12PM",
+                    location: "Apollo Health City in Arilova, Visakhapatnam",
+                    description:
+                        "He is a member of Medical Council of India (MCI). Some of the services provided by the doctor are: Urinary Incontinence (Ui) Treatment, Andrology, Genitourinary Surgery, Prostate Surgery, and Pediatric Urology.",
+                    mapLink: "https://maps.app.goo.gl/yyVvadVaJkAydukx9",
+                },
+                {
+                    name:"Sesha Mohan Debta",
+                    Specialization:"General Physician",
+                    Experience:"25 years",
+                    hospital:"Apollo Health City",
+                    successRate:"99%",
+                    timings:"11AM-2PM",
+                    location:"Apollo Health City in Arilova, Visakhapatnam and Apollo Healthcity Hospital in Ram Nagar, Visakhapatnam",
+                    description:"He is a member of Medical Council of India (MCI),NSI,NSSI and Delhi Neurological Association (DNA)",
+                   mapLink:"https://maps.app.goo.gl/yyVvadVaJkAydukx9",
+                },
+                {
+            name: "Dr. Kuchela Babu V",
+            specialization: "Anesthesiology & Critical Care",
+            experience: "37 years",
+            hospital: "SevenHills Hospital",
+            successRate: "89%",
+            timings: "9AM-2PM",
+            location: "Rockdale Layout, Waltair Main Road, Visakhapatnam",
+            description:
+                "Dr. V. Kuchela Babu has contributed significantly to Critical Health Care Management. His extensive experience has led to advancements in artificial life support systems such as ventilator therapy. Under his leadership, over 6000 successful surgeries are conducted annually at SevenHills Hospital. The Department of Anesthesiology and Critical Care, headed by Dr. Kuchela Babu, has over 40 years of expertise.",
+            mapLink: "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. K Vamsi Krishna",
+            "specialization": "Endocrinology",
+            "experience": "12 years",
+            "hospital": "Medicover Hospital - Visakhapatnam",
+            "successRate": "76%",
+            "timings": "9AM-12PM",
+            "location": "Venkojipalem / MVP Colony, Visakhapatnam",
+            "description": "Chief Consultant Endocrinologist at Medicover Hospital, Visakhapatnam.",
+            "mapLink": "https://maps.app.goo.gl/Yc5es7QLcEQ7SvnH9"
+        },
+        {
+            "name": "Dr. Rajesh Kumar P",
+            "specialization": "Vascular Surgery",
+            "experience": "12 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "74%",
+            "timings": "10AM-6PM",
+            "location": "Rockdale Layout, Waltair Main Road, Visakhapatnam",
+            "description": "Experienced Vascular Surgeon at Seven Hills Hospital, specializing in vascular procedures.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Rajini Mukerjee",
+            "specialization": "Paediatrics & Neonatology",
+            "experience": "31 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "92%",
+            "timings": "10AM-1PM",
+            "location": "Waltair Main Road, Visakhapatnam",
+            "description": "Dr. Rajini Mukerjee has over 30 years of experience in Paediatrics & Neonatology. She has served in the Indian Air Force for 5 years and is an NABH Assessor for the National Accreditation Board for Hospitals.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Laura Martinez",
+            "specialization": "Dermatology",
+            "experience": "9 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "66%",
+            "timings": "10AM-5PM",
+            "location": "Seven Hills Hospital, Visakhapatnam",
+            "description": "Experienced dermatologist providing skin care treatments at Seven Hills Hospital.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Surendra",
+            "specialization": "ENT",
+            "experience": "31 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "94%",
+            "timings": "10AM-7PM",
+            "location": "11-4-4/A, Waltair Main Road, Ram Nagar, Visakhapatnam",
+            "description": "Dr. Surendra has over 30 years of experience in ENT treatments, including ear, nose, and throat surgeries.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Sanjay Moka",
+            "specialization": "Physiotherapy",
+            "experience": "11 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "70%",
+            "timings": "10AM-1:30PM",
+            "location": "11-4-4/A, Waltair Main Road, Ram Nagar, Visakhapatnam",
+            "description": "Graduated with BPT in 2012 and completed a Post Graduate Fellowship Diploma in Manual Therapy in 2018. Specialized in acute trauma management, sports injuries, and post-surgical rehabilitation.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Ratna Prasad K",
+            "specialization": "Dermatology",
+            "experience": "24 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "87%",
+            "timings": "8AM-12:30PM",
+            "location": "Ram Nagar, Visakhapatnam",
+            "description": "Dr. Ratna Prasad has over 23 years of experience in dermatology, specializing in skin treatments, cosmetic surgery, and HIV-related conditions.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. K A Tariq Ali",
+            "specialization": "Pulmonology",
+            "experience": "17 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "75%",
+            "timings": "8AM-2:30PM",
+            "location": "Ram Nagar, Visakhapatnam",
+            "description": "Dr. Ali specializes in pulmonology procedures, including diagnostic bronchoscopies, chest tube placement, and sleep medicine.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Chittarajan Kundu",
+            "specialization": "Oncology",
+            "experience": "37 years",
+            "hospital": "Seven Hills Hospital",
+            "successRate": "97%",
+            "timings": "8AM-12:30PM",
+            "location": "Ram Nagar, Visakhapatnam",
+            "description": "Dr. Kundu has extensive experience in homeopathic oncology, psychology, and medical research. He has served as a Research Officer under the Ministry of Ayush.",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Abdul D Khan",
+            "specialization": "General Physician",
+            "experience": "25 years",
+            "hospital": "Seven Hills",
+            "successRate": "81%",
+            "timings": "10AM-2:30PM",
+            "location": "Ram Nagar, Visakhapatnam",
+            "description": "",
+            "mapLink": "https://maps.app.goo.gl/nPx5MS6Hb9n6ZLE68"
+        },
+        {
+            "name": "Dr. Partha Saradhi Bhattacharyya",
+            "specialization": "Radiation Oncologist",
+            "experience": "19 years",
+            "hospital": "CARE Hospital",
+            "successRate": "79%",
+            "timings": "10AM-2:30PM",
+            "location": "AS Raja Complex, 10-50-11/5, Waltair Main Rd, Ram Nagar, Visakhapatnam, Andhra Pradesh 530002",
+            "description": "Radiation Oncologist interested in High Precision Radiotherapy and more of image-guided interstitial brachytherapy. Introduced interstitial IGBT for Gynecologic cancer at my present working place. Completed more than 120 applications for Gynecologic Interstitial IGBT. Also started a few head-neck cases of IGBT.",
+            "mapLink": "https://maps.app.goo.gl/LN4dE253jtjjpgBz9"
+        },
+        {
+            "name": "Dr. Voona Murali Krishna",
+            "specialization": "Surgical Oncologist",
+            "experience": "31 years",
+            "hospital": "CARE Hospital",
+            "successRate": "93%",
+            "timings": "10AM-12:30PM",
+            "location": "AS Raja Complex, 10-50-11/5, Waltair Main Rd, Ram Nagar, Visakhapatnam, Andhra Pradesh 530002",
+            "description": "Dr. Murali Krishna Voonna is the Managing Director & Chief Surgical Oncologist at Mahatma Gandhi Cancer Hospital and Research Institute, Visakhapatnam. He has over 26+ years of extensive experience in offering specialized Surgical Oncology to the Head & Neck, Breast & Gynaec, and Bones & Soft Tissues. He is a renowned surgical cancer specialist and has performed over 12,000 complex cancer Surgeries so far.",
+            "mapLink": "https://maps.app.goo.gl/LN4dE253jtjjpgBz9"
+        },
+        {
+            "name": "Dr. CV Rao",
+            "specialization": "Cardiologist",
+            "experience": "32 years",
+            "hospital": "CARE Hospital",
+            "successRate": "94%",
+            "timings": "9AM-8:30PM",
+            "location": "10-50, AS Raja Complex, CARE Hospitals, 1st floor, Room no. 16, 11/5, Waltair Main Rd, Ram Nagar, Visakhapatnam",
+            "description": "CARE Hospitals Vizag is a cardiologist located in Visakhapatnam, Andhra Pradesh.",
+            "mapLink": "https://maps.app.goo.gl/LN4dE253jtjjpgBz9"
+        },
+        {
+            "name": "Dr. Ravindra Varma",
+            "specialization": "Andrologist",
+            "experience": "19 years",
+            "hospital": "AINU Hospital",
+            "successRate": "93%",
+            "timings": "8AM-9:30PM",
+            "location": "Dwarakanagar, Visakhapatnam",
+            "description": "He is a pioneer in Laparoscopic Urology, Paediatric Urology, Urethral Reconstruction, and Uro-Oncology in Visakhapatnam.",
+            "mapLink": "https://maps.app.goo.gl/RG3PxdXs3yHc9mPQ7"
+        },
+        {
+            "name": "Dr. Amit Sapale",
+            "specialization": "Urologist",
+            "experience": "30 years",
+            "hospital": "AINU Hospital",
+            "successRate": "80%",
+            "timings": "10AM-8:30PM",
+            "location": "Dwarakanagar, Visakhapatnam",
+            "description": "Doctor Amit Sapale has contributed to handling numerous complex medical cases in several hospitals. He specializes in Endo-urology, Uro-oncology, Laparoscopic urology, Renal transplant, Pediatric and reconstructive urology, Female urology, and Andrology. He is also an active member of the Indian Medical Association (IMA).",
+            "mapLink": "https://maps.app.goo.gl/RG3PxdXs3yHc9mPQ7"
+        },
+        {
+            "name": "Dr. P. Sridhar",
+            "specialization": "Urologist",
+            "experience": "15 years",
+            "hospital": "AINU Hospital",
+            "successRate": "81%",
+            "timings": "10AM-8:30PM",
+            "location": "Dwarakanagar, Visakhapatnam",
+            "description": "Dr. P Sridhar practices at Asian Institute of Nephrology and Urology in Dwarakanagar, Visakhapatnam. He completed MBBS from Dr. NTR University of Health Sciences Andhra Pradesh in 2009 and MCh - Urology/Genito-Urinary Surgery from Dr. NTR University of Health Sciences Andhra Pradesh in 2017.",
+            "mapLink": "https://maps.app.goo.gl/RG3PxdXs3yHc9mPQ7"
+        },
+        {
+            "name": "Dr. Avinash P",
+            "specialization": "Ophthalmology",
+            "experience": "25 years",
+            "hospital": "L V Prasad Eye Hospital",
+            "successRate": "93%",
+            "timings": "8AM-5:30PM",
+            "location": "GMR Varalakshmi Campus, Visakhapatnam",
+            "description": "Dr. Pathengay is a co-founder of RETNETINDIA, a group with over 950 retinal surgeons in India. He has over 100 presentations in international and national conferences, 147 peer-reviewed publications, and has authored 9 chapters in various textbooks. He was honored as the Outstanding International Scholar by the Bascom Palmer Eye Institute, USA, and has received several awards for his contributions to ophthalmology.",
+            "mapLink": "https://maps.app.goo.gl/uecG6WEeEaaPptDu7"
+        },
+        {
+            "name": "Dr. Bhavik Uttam Panchal",
+            "specialization": "FICO",
+            "experience": "20 years",
+            "hospital": "Rainbow Children Hospital",
+            "successRate": "93%",
+            "timings": "8AM-5:30PM",
+            "location": "Plot No.15A, Survey No.21 & 27 Health City, Chinnagadili, Andhra Pradesh 530040",
+            "description": "Dr. Panchal is a clinician with a keen interest in research and academics. He has numerous indexed publications in international peer-reviewed journals and has presented multiple papers at national and international levels, winning several awards. His areas of interest include pediatric retina, retinopathy of prematurity, infectious and non-infectious uveitis, and managing complex retinal detachments.",
+            "mapLink": "https://maps.app.goo.gl/HPZJmXw1AsV8D74R6"
+        },
+        {
+            "name": "Dr. Pankaj Dongre",
+            "specialization": "Ophthalmologist",
+            "experience": "29 years",
+            "hospital": "Rainbow Children Hospital",
+            "successRate": "93%",
+            "timings": "8AM-5:30PM",
+            "location": "Plot No.15A, Survey No.21 & 27 Health City, Chinnagadili, Andhra Pradesh 530040",
+            "description": "",
+            "mapLink": "https://maps.app.goo.gl/HPZJmXw1AsV8D74R6"
+        }
+    ];
+
+    const doctorList = document.getElementById("doctorList");
+    const searchInput = document.getElementById("searchBox");
+    const doctorSearchContainer = document.getElementById("doctorSearchContainer");
+    const toggleDoctorsBtn = document.getElementById("toggleDoctorsBtn");
+
+    function displayDoctors(doctorsToShow) {
+        doctorList.innerHTML = '';
+        doctorsToShow.forEach(doctor => {
+            const li = document.createElement('li');
+            li.className = 'doctor-item';
+            li.innerHTML = `
+                <div>
+                    <div class="doctor-name">${doctor.name}</div>
+                    <div class="doctor-specialization">${doctor.specialization}</div>
+                    <div>Experience: ${doctor.experience}</div>
+                    <div>Hospital: ${doctor.hospital}</div>
+                    <div>Timings: ${doctor.timings}</div>
+                    <div>Success Rate: ${doctor.successRate}</div>
+                </div>
+                <a href="${doctor.mapLink}" target="_blank">
+                    <button class="btn-blue">View Location</button>
+                </a>
+            `;
+            doctorList.appendChild(li);
+        });
+    }
+
+    toggleDoctorsBtn.addEventListener('click', function() {
+        if (doctorSearchContainer.style.display === 'none' || !doctorSearchContainer.style.display) {
+            doctorSearchContainer.style.display = 'block';
+            toggleDoctorsBtn.textContent = 'Hide Doctors';
+            displayDoctors(doctors);
+        } else {
+            doctorSearchContainer.style.display = 'none';
+            toggleDoctorsBtn.textContent = 'Show Doctors';
+        }
+    });
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const filteredDoctors = doctors.filter(doctor => 
+            doctor.name.toLowerCase().includes(searchTerm) || 
+            doctor.specialization.toLowerCase().includes(searchTerm)
+        );
+        displayDoctors(filteredDoctors);
+    });
+});
+    </script>
+</head>
+<body>
+    <h1>Smart Health Assistant</h1>
+    <div class="container">
+        <h2>🔎 Find a Doctor</h2>
+        <button id="toggleDoctorsBtn">Show Doctors</button>
+        
+        <div class="doctor-search-container" id="doctorSearchContainer">
+            <input type="text" id="searchBox" class="search-box" placeholder="Search by name or specialization">
+            <ul id="doctorList" class="doctor-list"></ul>
+        </div>
+    </div>
+</body>
+</html>

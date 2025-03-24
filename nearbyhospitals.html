@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+    <title>Smart Health Assistant</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+            color: #e6e6e6;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            color: #00ffff;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            width: 400px;
+            margin: 20px auto;
+            color: #e6e6e6;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+        .btn-green { 
+            background: linear-gradient(45deg, #00ff9d, #00b4d8);
+            color: #1a1a2e;
+        }
+        .btn-green:hover { 
+            background: linear-gradient(45deg, #00b4d8, #00ff9d);
+        }
+        select, button, input {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(26, 26, 46, 0.9);
+            color: #e6e6e6;
+            transition: all 0.3s ease;
+        }
+
+        select:hover, input:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ffff, #00b4d8);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #00b4d8, #00ffff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+    </style>
+    <script>
+        function findNearestHospital() {
+            window.open("https://www.google.com/maps/search/hospital/", "_blank");
+        }
+    </script>
+</head>
+<body>
+    <h1>🌍 Smart Health Assistant</h1>
+    <div class="container">
+        <h2>🏥 Find Nearest Hospital</h2>
+        <button class="btn-green" onclick="findNearestHospital()">Find Hospital</button>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color:  rgba(5, 5, 54, 0.9);
+            padding: 15px;
+            color: white;
+            height: 70px;
+        }
+        .nav-left {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-right {
+            display: flex;
+            gap: 15px;
+        }
+        .nav-left a, .nav-right a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .nav-left a:hover, .nav-right a:hover {
+            text-decoration: underline;
+        }
+        
+        .hero {
+            background-color: #e8f5e9; /* Light green background */
+            color: #333;
+            padding: 100px 0;
+            height: 100vh;
+            width: 100vw;
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: left;
+            /* background: url("https://wallpapercave.com/wp/wp6938553.jpg"); */
+            background: url("https://wallpaperaccess.com/full/624111.jpg");
+
+        }
+
+        .hero-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .hero-text h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #eae4f3f2; /* Health-related color */
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .hero-text p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: white;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-left">
+            <a href="symtom.html">Symptoms</a>
+            <a href="medicines.html">Medication Use</a>
+            <a href="nearbyhospitals.html">Hospitals</a>
+            <a href="responsibilities.html">Doctors</a>
+            <a href="details.html">Details</a>
+            <a href="firstaid.html">Firstaid</a>
+        </div>
+        <div class="nav-right">
+            <a href="demo.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="login.html">Login</a>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Your Path to a Healthier Life</h1>
+                    <p>We provide comprehensive healthcare solutions with a team of experienced professionals.</p>
+                    
+                </div>
+                <div class="hero-image">
+                    <!-- <img src="healthcare-hero.png" alt="Healthcare Hero Image">  -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

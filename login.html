@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #f7f7f7; 
+            font-family: Arial, sans-serif;
+        }
+
+        .form-container {
+            width: 350px;
+            background-color: #fff;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 10px;
+            box-sizing: border-box;
+            padding: 30px;
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px; 
+            font-size: 28px;
+            font-weight: 800;
+            color: #333; 
+        }
+
+        .input {
+            border-radius: 20px;
+            border: 1px solid #d9d9d9; 
+            outline: 0 !important;
+            box-sizing: border-box;
+            padding: 12px 15px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .form-btn, .apple-login-button, .google-login-button {
+            padding: 12px 15px; 
+            border-radius: 20px;
+            border: 0 !important;
+            outline: 0 !important;
+            background: #008080; 
+            color: white;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px; 
+            box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px; 
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-btn:hover {
+            background: #006666;
+        }
+
+        .apple-login-button {
+            background-color: #000;
+        }
+
+        .apple-login-button:hover {
+            background-color: #222;
+        }
+
+        .google-login-button {
+            background-color: #fff;
+            color: #4285f4; 
+            border: 1px solid #4285f4;
+        }
+
+        .google-login-button:hover {
+            background-color: #e8f0fe;
+        }
+
+        .page-link {
+            text-align: center;
+            font-size: 14px; 
+            color: #777;
+            margin-top: 20px;
+        }
+
+        .page-link-label {
+            color: #008080;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .sign-up-label {
+            text-align: center;
+            font-size: 14px; 
+            color: #777;
+            margin-top: 30px;
+        }
+
+        .sign-up-link {
+            color: #008080;
+            cursor: pointer;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        
+        .form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <p class="title">Welcome back</p>
+        <form class="form">
+            <input type="email" class="input" placeholder="Email">
+            <input type="password" class="input" placeholder="Password">
+            <p class="page-link">
+                <span class="page-link-label">Forgot Password?</span>
+            </p>
+            <button class="form-btn"><a href="demo.html">Log in</a></button>
+        </form>
+        <p class="sign-up-label">
+            Don't have an account? <span class="sign-up-link">Sign up</span>
+        </p>
+        <button class="apple-login-button">Log in with Apple</button>
+        <button class="google-login-button">Log in with Google</button>
+    </div>
+</body>
+</html>

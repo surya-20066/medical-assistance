@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Health Assistant</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+            color: #e6e6e6;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            color: #00ffff;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            width: 400px;
+            margin: 20px auto;
+            color: #e6e6e6;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+
+        select, button, input {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(26, 26, 46, 0.9);
+            color: #e6e6e6;
+            transition: all 0.3s ease;
+        }
+
+        select:hover, input:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ffff, #00b4d8);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #00b4d8, #00ffff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+    </style>
+    <script>
+        function suggestMedicine() {
+            let issue = document.getElementById("healthIssue").value;
+            let medicines = {
+                "headache": "Paracetamol, Ibuprofen - Take rest, drink water.",
+                "fever": "Dolo-650, Paracetamol - Stay hydrated, rest well.",
+                "cough": "Benadryl, Cetirizine - Avoid cold drinks, take warm fluids.",
+                "vomiting": "Domperidone, ORS - Drink plenty of fluids, avoid greasy foods.",
+                "diabetes": "Metformin, Insulin - Monitor sugar levels, maintain diet.",
+                "high blood pressure": "Amlodipine, Losartan - Reduce salt intake, exercise.",
+                "low blood pressure": "Fludrocortisone, Midodrine - Increase salt, drink more water.",
+                "acidity": "Pantoprazole, Rantac - Avoid spicy food, eat small meals.",
+                "allergy": "Cetirizine, Allegra - Avoid allergens, take antihistamines.",
+                "asthma": "Montelukast, Salbutamol - Avoid dust, use inhalers.",
+                "thyroid": "Levothyroxine, Carbimazole - Maintain diet, monitor levels.",
+                "kidney stones": "Tamsulosin, Potassium Citrate - Drink lots of water, avoid calcium-rich foods."
+            };
+            document.getElementById("medicineResult").innerText = medicines[issue] || "Please select a valid health issue.";
+        }
+    </script>
+</head>
+<body>
+    <h1>🌍 Smart Health Assistant</h1>
+    <div class="container">
+        <h2>🦠 Select Your Health Issue</h2>
+        <select id="healthIssue">
+            <option value="">-- Select a disease --</option>
+            <option value="headache">Headache</option>
+            <option value="fever">Fever</option>
+            <option value="cough">Cough</option>
+            <option value="vomiting">Vomiting</option>
+            <option value="diabetes">Diabetes</option>
+            <option value="high blood pressure">High Blood Pressure</option>
+            <option value="low blood pressure">Low Blood Pressure</option>
+            <option value="acidity">Acidity</option>
+            <option value="allergy">Allergy</option>
+            <option value="asthma">Asthma</option>
+            <option value="thyroid">Thyroid</option>
+            <option value="kidney stones">Kidney Stones</option>
+        </select>
+        <button class="btn-green" onclick="suggestMedicine()">Get Medicine</button>
+        <div class="result" id="medicineResult"></div>
+        <h3><b>Note:</b><small> These medicines are only the suggestions </small></h3>
+    </div>
+</body>
+</html>

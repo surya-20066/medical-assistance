@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places"></script>
+    <title>Smart Health Assistant</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #1a1a2e);
+            color: #e6e6e6;
+            padding: 20px;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            color: #00ffff;
+            font-size: 2.5em;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            background: rgba(26, 26, 46, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
+            width: 400px;
+            margin: 20px auto;
+            color: #e6e6e6;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        }
+        .btn-green { 
+            background: linear-gradient(45deg, #00ff9d, #00b4d8);
+            color: #1a1a2e;
+        }
+        .btn-green:hover { 
+            background: linear-gradient(45deg, #00b4d8, #00ff9d);
+        }
+        select, button, input {
+            margin: 10px 0;
+            padding: 12px;
+            width: 100%;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            background: rgba(26, 26, 46, 0.9);
+            color: #e6e6e6;
+            transition: all 0.3s ease;
+        }
+
+        select:hover, input:hover {
+            border-color: rgba(0, 255, 255, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ffff, #00b4d8);
+            color: #1a1a2e;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #00b4d8, #00ffff);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+        }
+    </style>
+    <script>
+         function DoctorInfo() {
+    let doctorSelect = document.getElementById("deptlist");
+    let infoBox = document.getElementById("doctorInfo");
+
+    if (!doctorSelect || !infoBox) {
+        console.error("Error: Missing required elements in the HTML.");
+        return;
+    }
+
+    let doctor = doctorSelect.value;
+    let info = {
+        "General Practitioner (GP)": "<h1>General Practitioner (GP)</h1><h3>Role: Often the first point of contact for patients</h3><h3>Responsibilities: Diagnose and treat common illnesses, provide preventive care, and manage chronic conditions.</h3><h3>Common Treatments: Vaccinations, minor injuries, infections.</h3>",
+        "Pediatrician": "<h1>Pediatrician</h1><h3>Role: Specializes in medical care for children.</h3><h3>Responsibilities: Monitor growth, treat childhood illnesses, and provide immunizations.</h3><h3>Common Conditions: Asthma, allergies, developmental disorders.</h3>",
+        "Cardiologist": "<h1>Cardiologist</h1><h3>Role: Focuses on heart and blood vessel diseases.</h3><h3>Responsibilities: Diagnose heart conditions, perform tests, and recommend lifestyle changes.</h3><h3>Common Conditions: Hypertension, coronary artery disease, heart attacks.</h3>",
+        "Neurologist": "<h1>Neurologist</h1><h3>Role: Treats disorders of the nervous system.</h3><h3>Responsibilities: Perform neurological exams, manage epilepsy, and interpret MRIs.</h3><h3>Common Conditions: Stroke, Parkinson's disease, migraines.</h3>",
+        "Orthopedic Surgeon": "<h1>Orthopedic Surgeon</h1><h3>Role: Specializes in bones, joints, and muscles.</h3><h3>Responsibilities: Perform surgeries, repair fractures, replace joints.</h3><h3>Common Conditions: Arthritis, sports injuries, spinal disorders.</h3>",
+        "Dermatologist": "<h1>Dermatologist</h1><h3>Role: Focuses on skin, hair, and nail conditions.</h3><h3>Responsibilities: Diagnose acne, eczema, and skin cancer.</h3><h3>Common Procedures: Skin biopsies, mole removal, cosmetic treatments.</h3>",
+        "Oncologist": "<h1>Oncologist</h1><h3>Role: Diagnoses and treats cancer.</h3><h3>Subspecialties: Medical, radiation, and surgical oncology.</h3><h3>Responsibilities: Develop treatment plans, manage side effects, and provide palliative care.</h3>",
+        "Gynecologist": "<h1>Gynecologist</h1><h3>Role: Focuses on women's reproductive health.</h3><h3>Responsibilities: Manage pregnancy, treat reproductive disorders.</h3><h3>Common Conditions: PCOS, fibroids, endometriosis.</h3>",
+        "Obstetrician": "<h1>Obstetrician</h1><h3>Role: Specializes in pregnancy and childbirth.</h3><h3>Responsibilities: Monitor prenatal health, assist in labor, manage complications.</h3><h3>Common Procedures: C-sections, ultrasounds.</h3>",
+        "Psychiatrist": "<h1>Psychiatrist</h1><h3>Role: Deals with mental health disorders.</h3><h3>Responsibilities: Diagnose conditions, prescribe medication, provide therapy.</h3><h3>Common Conditions: Depression, anxiety, schizophrenia.</h3>"
+    };
+
+    infoBox.innerHTML = info[doctor] || "<h3>Please select a doctor to view information.</h3>";
+    infoBox.style.display = "block";
+}
+    </script>
+</head>
+<body>
+    <h1>🌍 Smart Health Assistant</h1>
+    <div class="container">
+        <h2>👨‍⚕ Doctor Info</h2>
+        <select id="deptlist" onclick="DoctorInfo()">
+            <option value="">-- Select a Doctor --</option>
+            <option value="General Practitioner (GP)">General Practitioner (GP)</option>
+            <option value="Pediatrician">Pediatrician</option>
+            <option value="Cardiologist">Cardiologist</option>
+            <option value="Neurologist">Neurologist</option>
+            <option value="Orthopedic Surgeon">Orthopedic Surgeon</option>
+            <option value="Dermatologist">Dermatologist</option>
+            <option value="Oncologist">Oncologist</option>
+            <option value="Gynecologist">Gynecologist</option>
+            <option value="Obstetrician">Obstetrician</option>
+            <option value="Psychiatrist">Psychiatrist</option>
+        </select>
+        <div class="result" id="doctorInfo"></div>
+    </div>
+
+</body>
+</html>
